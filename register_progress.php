@@ -20,6 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO user (username, email, password) VALUES ('$username', '$email',  '$password')";
     $error_message = "Email already exists. Use a different one";
     if ($conn->query($sql) === TRUE) {
+        session_start();
+        $_SESSION['logged_in'] = true;
         header("Location: home.php");
     } else {
         header("Location: register.php?error=" . urlencode($error_message));
