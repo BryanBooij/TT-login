@@ -59,7 +59,7 @@ if (isset($_GET['code'])) {
         $_SESSION['email'] = $email;
         $_SESSION['access_token'] = $accessToken;
         $_SESSION['logged_in'] = true;
-        header("Location: http://localhost/login/home.php");
+        header('Location: home.php');
         exit();
     } else {
         // User does not exist, insert into database and send email with password
@@ -90,7 +90,7 @@ if (isset($_GET['code'])) {
     $_SESSION['access_token'] = $accessToken;
     $_SESSION['logged_in'] = true;
     sendEmail($email, $randomPassword, $username);
-    header("Location: http://localhost/login/home.php");
+    header('Location: home.php');
 
 } else {
     $authUrl = $client->createAuthUrl();
