@@ -1,0 +1,11 @@
+[33mcommit 5611af55390143e68d97e754f0b0b6d4760b808c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Bryan_1025561 <1025561@hr.nl>
+Date:   Mon Apr 8 10:44:08 2024 +0200
+
+    fixed redirect
+
+[33mcommit 83f3ccbe8fb293a372af5d62554e748d33399537[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Bryan_1025561 <1025561@hr.nl>
+Date:   Mon Apr 8 10:29:08 2024 +0200
+
+    first commit
