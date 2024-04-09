@@ -1,11 +1,18 @@
 <?php
+session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    // Redirect to login page
+    header("Location: login.php");
+    exit;
+}
+
 
 $servername = "localhost";
-$username = "root";
+$dbusername = "root";
 $password = "";
 $database = "users";
 
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $dbusername, $password, $database);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -53,7 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <h2>Change Password</h2>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <label>Username:</label><br>
-    <input type="text" name="username"><br><br>
+    <input type="text" id="username" name="username" value="<?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : ''; ?>" readonly>
+    <br><br>
     <label>Old Password:</label><br>
     <input type="password" name="old_password"><br><br>
     <label>New Password:</label><br>

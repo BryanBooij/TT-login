@@ -2,11 +2,11 @@
 $config = require 'config/app.php';
 
 $servername = $config['servername'];
-$username = $config['usernamelocalhost'];
-$password = $config['passwordlocalhost'];
+$Gusername = $config['usernamelocalhost'];
+$Gpassword = $config['passwordlocalhost'];
 $database = $config['database'];
 
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $Gusername, $Gpassword, $database);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         session_start();
-        $_SESSION["username"] = $username;
+        $_SESSION['username'] = $username;
         $_SESSION['logged_in'] = true;
         header("Location: home.php");
         exit();
