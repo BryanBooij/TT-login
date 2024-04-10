@@ -57,6 +57,7 @@ if (isset($_GET['code'])) {
 
     if ($checkResult->num_rows > 0) {
         $_SESSION['email'] = $email;
+        $_SESSION['username'] = $name;
         $_SESSION['access_token'] = $accessToken;
         $_SESSION['logged_in'] = true;
         header('Location: home.php');
