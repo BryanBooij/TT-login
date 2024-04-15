@@ -46,7 +46,17 @@ if (isset($_GET['code'])) {
         return $password;
     }
 
+    function generate_user_secret($length = 16) {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'; // Base32 characters
+        $secret = '';
+        for ($i = 0; $i < $length; $i++) {
+            $secret .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $secret;
+    }
+
     $randomPassword = generateRandomPassword();
+    $user_secret = generate_user_secret();
 
     // Check if the user already exists in the database
     $checkUserQuery = "SELECT * FROM user WHERE email = ?";
@@ -64,7 +74,7 @@ if (isset($_GET['code'])) {
         exit();
     } else {
         // User does not exist, insert into database and send email with password
-        $insertSql = "INSERT INTO user (username, email, password) VALUES (?, ?, ?)";
+        $insertSql = "INSERT INTO user (username, email, password, secret) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($insertSql);
         if (!$stmt) {
             die("Error preparing statement: " . $conn->error);
@@ -73,7 +83,8 @@ if (isset($_GET['code'])) {
         $username = $name;
         $userEmail = $email;
         $password = $randomPassword;
-        if (!$stmt->bind_param("sss", $username, $userEmail, $password)) {
+        $secret = $user_secret;
+        if (!$stmt->bind_param("ssss", $username, $userEmail, $password, $secret)) {
             die("Error binding parameters: " . $stmt->error);
         }
 
@@ -87,7 +98,6 @@ if (isset($_GET['code'])) {
     }
 
     $conn->close();
-    $_SESSION['email'] = $email;
     $_SESSION['access_token'] = $accessToken;
     $_SESSION['logged_in'] = true;
     sendEmail($email, $randomPassword, $username);

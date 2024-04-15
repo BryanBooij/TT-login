@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         session_start();
         $_SESSION['username'] = $username;
-        $_SESSION['logged_in'] = true;
-        header("Location: home.php");
+        $_SESSION['password'] = $password;
+        header("Location: auth_redirect.php");
         exit();
     } else {
         session_start();
