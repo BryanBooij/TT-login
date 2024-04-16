@@ -101,7 +101,7 @@ if (isset($_GET['code'])) {
     $_SESSION['access_token'] = $accessToken;
     $_SESSION['logged_in'] = true;
     sendEmail($email, $randomPassword, $username);
-    header("Location: http://localhost/login/home.php");
+    header("Location: auth_redirect.php");
 
 } else {
     $authUrl = $client->createAuthUrl();

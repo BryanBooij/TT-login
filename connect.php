@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
+        $_SESSION['logged_in'] = true;
         header("Location: auth_redirect.php");
         exit();
     } else {
