@@ -15,9 +15,9 @@ session_start();
 <center>
     <form action="connect.php" method="post">
         <h1>Sign in</h1>
-        <div class="username">
-            <label for="username" class="username">Username: </label>
-            <input type="text" name="username" id="username">
+        <div class="username_or_email">
+            <label for="username_or_email" class="username_or_email">Username or Email: </label>
+            <input type="text" name="username_or_email" id="username_or_email">
         </div>
         <div class="password">
             <label for="password" class="password">Password: </label>

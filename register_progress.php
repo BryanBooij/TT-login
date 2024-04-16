@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Username already exists. Use a different one";
     } else {
         // Insert the new user into the database
-        $sql = "INSERT INTO user (username,display_username, email, password, secret) VALUES ('$username', '$username', '$email',  '$hashed_password', '$user_secret')";
+        $sql = "INSERT INTO user (username, display_username, email, password, secret) VALUES ('$username', '$username', '$email',  '$hashed_password', '$user_secret')";
         $error_message = "Email already exists. Use a different one";
     }
 
