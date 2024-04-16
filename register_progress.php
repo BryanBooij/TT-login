@@ -34,9 +34,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit; // Stop execution
     }
 
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $user_secret = generate_user_secret();
-    $sql = "INSERT INTO user (username, email, password, secret) VALUES ('$username', '$email',  '$password', '$user_secret')";
-    $error_message = "Email already exists. Use a different one";
+    // Check if the email or username already exists
+//    $emailExists = emailExists($email);
+    function usernameExists($username) {
+        global $conn;
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM user WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+
+        return $count > 0;
+    }
+    $usernameExists = usernameExists($username);
+
+    if ($usernameExists) {
+        $error_message = "Username already exists. Use a different one";
+    } else {
+        // Insert the new user into the database
+        $sql = "INSERT INTO user (username,display_username, email, password, secret) VALUES ('$username', '$username', '$email',  '$hashed_password', '$user_secret')";
+        $error_message = "Email already exists. Use a different one";
+    }
+
+
     if ($conn->query($sql) === TRUE) {
         session_start();
         $_SESSION['logged_in'] = true;

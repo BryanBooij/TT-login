@@ -56,37 +56,42 @@ if (isset($_GET['code'])) {
     }
 
     $randomPassword = generateRandomPassword();
+    $hashed_password = password_hash($randomPassword, PASSWORD_DEFAULT);
     $user_secret = generate_user_secret();
 
-    // Check if the user already exists in the database
+    // Check if the email already exists in the database
     $checkUserQuery = "SELECT * FROM user WHERE email = ?";
     $checkStmt = $conn->prepare($checkUserQuery);
     $checkStmt->bind_param("s", $email);
     $checkStmt->execute();
     $checkResult = $checkStmt->get_result();
 
+    $userEmail = $email;
+    $password = $hashed_password;
+    $secret = $user_secret;
+
     if ($checkResult->num_rows > 0) {
-        $_SESSION['email'] = $email;
-        $_SESSION['username'] = $name;
         $_SESSION['access_token'] = $accessToken;
         $_SESSION['logged_in'] = true;
-        header("Location: http://localhost/login/home.php");
+        //$_SESSION['username'] = $username;
+        $_SESSION['username'] = $userEmail;
+        $_SESSION['password'] = $password;
+        // Email already exists, handle accordingly
+        // You can redirect, show an error message, or take any other action
+        header("Location: auth_redirect.php");
         exit();
     } else {
-        // User does not exist, insert into database and send email with password
-        $insertSql = "INSERT INTO user (username, email, password, secret) VALUES (?, ?, ?, ?)";
+        // Insert the user into the database
+        $insertSql = "INSERT INTO user (username, display_username, email, password, secret) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertSql);
         if (!$stmt) {
             die("Error preparing statement: " . $conn->error);
         }
 
-        $username = $name;
-        $userEmail = $email;
-        $password = $randomPassword;
-        $secret = $user_secret;
-        if (!$stmt->bind_param("ssss", $username, $userEmail, $password, $secret)) {
+        if (!$stmt->bind_param("sssss", $userEmail, $name, $userEmail, $password, $secret)) {
             die("Error binding parameters: " . $stmt->error);
         }
+
 
         if ($stmt->execute()) {
             echo "New record created successfully";
@@ -100,7 +105,10 @@ if (isset($_GET['code'])) {
     $conn->close();
     $_SESSION['access_token'] = $accessToken;
     $_SESSION['logged_in'] = true;
-    sendEmail($email, $randomPassword, $username);
+    //$_SESSION['username'] = $username;
+    $_SESSION['username'] = $userEmail;
+    $_SESSION['password'] = $password;
+    sendEmail($email, $randomPassword, $name);
     header("Location: auth_redirect.php");
 
 } else {

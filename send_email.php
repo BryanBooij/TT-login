@@ -23,7 +23,8 @@ function sendEmail($email, $randomPassword, $username)
         $mail_FROM = 'bryan@touchtree.tech';
         $user_RCPT = $email;
         $user_password = $randomPassword;
-        $user_name = $username;
+        $user_name = $email;
+        $display_name = $username;
 
         // SMTP server settings
         $mail->isSMTP();
@@ -41,7 +42,7 @@ function sendEmail($email, $randomPassword, $username)
         // Email content
         $mail->isHTML(true);
         $mail->Subject = 'Successful login';
-        $mail->Body = "<p>Successful login. <br> Your username is: " . $user_name . " <br>Your password is: " . $user_password . " <br> you can now change you're password</p>";
+        $mail->Body = "<p>Successful login. <br> Your username is: " . $user_name . " <br> Your display name is: " . $display_name . " <br> Your password is: " . $user_password . " <br> you can now change you're password</p>";
 
         // Send email + error message if needed
         $mail->send();

@@ -29,7 +29,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 if (isset($_SESSION['access_token'])) {
-    echo '<a href="google_logout.php">google logout</a>';
+    echo '<a href="google_logout.php">Logout</a>';
 } else {
     echo '<a href="logout.php">Logout</a>';
 }
