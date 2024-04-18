@@ -23,7 +23,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 </head>
 <body>
 <h1>Successfully logged in!</h1>
-<a href="change_password.php">change password</a><br>
+<a href="change_password.php">Change password</a><br>
 </body>
 <?php
 require_once __DIR__ . '/vendor/autoload.php';

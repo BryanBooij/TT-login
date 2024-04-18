@@ -2,7 +2,7 @@
 session_start();
 $_SESSION['logged_in'] = true;
 $username = $_SESSION['username'];
-$password = $_SESSION['password'];
+//$password = $_SESSION['password'];
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     // Redirect to login page
     header("Location: login.php");
@@ -26,17 +26,12 @@ if ($conn->connect_error) {
 }
 
 // Prepare SQL query with parameters
-$sql = "SELECT secret FROM user WHERE username=? AND password=?";
+$sql = "SELECT secret FROM user WHERE username=?";
 $stmt = $conn->prepare($sql);
-
-// Bind parameters and execute the statement
-$stmt->bind_param("ss", $username, $password);
+$stmt->bind_param("s", $username);
 $stmt->execute();
-
-// Get the result of the query
 $result = $stmt->get_result();
 
-// Check if the query execution was successful
 if ($result === false) {
     die("Error executing the query: " . $conn->error);
 }
@@ -75,15 +70,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['auth'] = true;
         header("Location: home.php");
     } else {
-        echo "Invalid OTP code. Please try again.";
+        $_SESSION['error_message'] = 'Invalid OTP code. Please try again.';
     }
 }
 ?>
-
+<center>
 <!-- HTML form -->
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    <label for="otp">Enter OTP:</label><br>
+    <label for="otp">Enter 6 digit code:</label><br>
     <input type="text" id="otp" name="otp"><br>
     <input type="submit" value="Submit">
 </form>
 <a href="auth_redirect.php">Back</a>
+
+<?php
+if (isset($_SESSION['error_message'])) {
+    echo '<p style="color: red;">' . $_SESSION['error_message'] . '</p>';
+    unset($_SESSION['error_message']);
+}
+?>
+</center>

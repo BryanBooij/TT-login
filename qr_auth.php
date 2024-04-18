@@ -52,10 +52,10 @@ $grCodeUri = $otp->getQrCodeUri(
 );
 
 // Display the QR code for the user to scan
-echo "<img src='{$grCodeUri}' alt='QR Code'><br>";
+echo "<center><img src='{$grCodeUri}' alt='QR Code'><br></center>";
 
 // Inform the user that 2FA setup is complete
-echo "Scan the QR code above with your authenticator app to complete 2FA setup. <br>";
+echo "<center>Scan the QR code above with your authenticator app to complete 2FA setup. <br></center>";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve input OTP code
@@ -71,15 +71,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['auth'] = true;
         header("Location: home.php");
     } else {
-        echo "Invalid OTP code. Please try again.";
+        $_SESSION['error_message'] = 'Invalid OTP code. Please try again.';
     }
 }
 ?>
-
+<center>
 <!-- HTML form -->
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    <label for="otp">Enter OTP:</label><br>
+    <label for="otp">Enter 6 digit code:</label><br>
     <input type="text" id="otp" name="otp"><br>
     <input type="submit" value="Submit">
 </form>
 <a href="auth_redirect.php">Back</a>
+    <?php
+    if (isset($_SESSION['error_message'])) {
+        echo '<p style="color: red;">' . $_SESSION['error_message'] . '</p>';
+        unset($_SESSION['error_message']);
+    }
+    ?>
+</center>

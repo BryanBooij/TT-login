@@ -16,5 +16,5 @@ $client->revokeToken($access_token);
 session_destroy();
 
 
-$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/TT-login/login.php';
+$redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/login/login.php';
 header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
