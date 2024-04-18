@@ -9,14 +9,15 @@ session_start();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>loginform</title>
+
 </head>
 <body>
 <center>
     <form action="connect.php" method="post">
         <h1>Sign in</h1>
-        <div class="username">
-            <label for="username" class="username">Username: </label>
-            <input type="text" name="username" id="username">
+        <div class="username_or_email">
+            <label for="username_or_email" class="username_or_email">Username or Email: </label>
+            <input type="text" name="username_or_email" id="username_or_email">
         </div>
         <div class="password">
             <label for="password" class="password">Password: </label>

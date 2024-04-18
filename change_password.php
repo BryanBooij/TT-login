@@ -30,19 +30,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $new_password = mysqli_real_escape_string($conn, $new_password);
 
         // Fetch user from the database
-        $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$old_password'";
+        $sql = "SELECT * FROM user WHERE username = '$username'";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) == 1) {
-            // Update the password
-            $update_sql = "UPDATE user SET password = '$new_password' WHERE username = '$username'";
-            if (mysqli_query($conn, $update_sql)) {
-                echo "Password updated successfully!";
+            $row = mysqli_fetch_assoc($result);
+            $hashed_password = $row['password'];
+
+            // Verify old password
+            if (password_verify($old_password, $hashed_password)) {
+                // Hash the new password
+                $hashed_new_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+                // Update the password
+                $update_sql = "UPDATE user SET password = '$hashed_new_password' WHERE username = '$username'";
+                if (mysqli_query($conn, $update_sql)) {
+                    echo "Password updated successfully!";
+                } else {
+                    echo "Error updating password: " . mysqli_error($conn);
+                }
             } else {
-                echo "Error updating password: " . mysqli_error($conn);
+                echo "Invalid old password!";
             }
         } else {
-            echo "Invalid username or old password!";
+            echo "Invalid username!";
         }
     } else {
         echo "All fields are required!";

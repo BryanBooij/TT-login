@@ -13,21 +13,24 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
+    $usernameOrEmail = $_POST["username_or_email"];
     $password = $_POST["password"];
 
-    $sql = "SELECT * FROM user WHERE username='$username' AND password='$password'";
-    $result = $conn->query($sql);
+    // Fetch the hashed password from the database based on the provided username or email
+    $stmt = $conn->prepare("SELECT username, password FROM user WHERE username = ? OR email = ?");
+    $stmt->bind_param("ss", $usernameOrEmail, $usernameOrEmail);
+    $stmt->execute();
+    $stmt->bind_result($username, $hashedPassword);
+    $stmt->fetch();
+    $stmt->close();
 
-    if ($result === false) {
-        die("Error executing the query: " . $conn->error);
-    }
-
-    if ($result->num_rows > 0) {
+    // Verify the password
+    if ($hashedPassword !== null && password_verify($password, $hashedPassword)) {
         session_start();
         $_SESSION['username'] = $username;
         $_SESSION['logged_in'] = true;
-        header("Location: home.php");
+        $_SESSION['password'] = $password;
+        header("Location: auth_redirect.php");
         exit();
     } else {
         session_start();
@@ -36,3 +39,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
+?>
