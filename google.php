@@ -15,7 +15,7 @@ session_start();
 
 $client = new Google_Client();
 $client->setAuthConfig(__DIR__ . '/secret/client_secret.json');
-$client->setRedirectUri('http://localhost/login/google.php');
+$client->setRedirectUri('http://localhost/TT-login/google.php');
 $client->addScope(['openid', 'profile', 'email']);
 
 

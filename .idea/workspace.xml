@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5ccef30d-bb29-43bf-abf2-4b03bdb05c2f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/google.php" beforeDir="false" afterPath="$PROJECT_DIR$/google.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/google_logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/google_logout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/send_email.php" beforeDir="false" afterPath="$PROJECT_DIR$/send_email.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +72,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/xampp/htdocs/google-oauth-app",
+    "last_opened_file_path": "C:/xampp/htdocs/TT-login",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -108,7 +111,8 @@
       <workItem from="1713265325874" duration="9508000" />
       <workItem from="1713423205472" duration="5718000" />
       <workItem from="1713509097485" duration="607000" />
-      <workItem from="1713511088907" duration="4112000" />
+      <workItem from="1713511088907" duration="5007000" />
+      <workItem from="1713516738236" duration="661000" />
     </task>
     <servers />
   </component>
