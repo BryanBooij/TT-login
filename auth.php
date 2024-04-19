@@ -44,16 +44,6 @@ $secret = $user_secret;
 // Create TOTP object with the generated secret
 $otp = TOTP::create($secret);
 
-// Set the label for the user (optional)
-$otp->setLabel('TouchTree');
-
-// Generate QR code URI for the user to scan
-$grCodeUri = $otp->getQrCodeUri(
-    'https://api.qrserver.com/v1/create-qr-code/?data=[DATA]&size=300x300&ecc=M',
-    '[DATA]'
-);
-// Display the QR code for the user to scan
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve input OTP code
     $input_otp = $_POST['otp'];

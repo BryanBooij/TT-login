@@ -7,8 +7,6 @@
     <list default="true" id="5ccef30d-bb29-43bf-abf2-4b03bdb05c2f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_redirect.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth_redirect.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qr_auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/qr_auth.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +52,9 @@
       <path value="$PROJECT_DIR$/vendor/beberlei/assert" />
       <path value="$PROJECT_DIR$/vendor/thecodingmachine/safe" />
     </include_path>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -107,7 +108,7 @@
       <workItem from="1713265325874" duration="9508000" />
       <workItem from="1713423205472" duration="5718000" />
       <workItem from="1713509097485" duration="607000" />
-      <workItem from="1713511088907" duration="3908000" />
+      <workItem from="1713511088907" duration="4112000" />
     </task>
     <servers />
   </component>
