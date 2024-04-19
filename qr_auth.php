@@ -2,7 +2,6 @@
 session_start();
 $_SESSION['logged_in'] = true;
 $username = $_SESSION['username'];
-//$password = $_SESSION['password'];
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     // Redirect to login page
     header("Location: login.php");
@@ -26,7 +25,7 @@ if ($conn->connect_error) {
 }
 
 // Prepare SQL query with parameters to check if the user already has a secret
-$sql = "SELECT secret FROM user WHERE username=?";
+$sql = "SELECT secret, email FROM user WHERE username=?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $username);
 $stmt->execute();
@@ -39,11 +38,11 @@ if ($result === false) {
 $user = $result->fetch_assoc();
 // Fetch the user's secret from the result set
 $user_secret = $user['secret'];
-//$user_password_hashed = $user['password'];
 
 // Create TOTP object with the user's secret
 $otp = TOTP::create($user_secret);
-$otp->setLabel('TouchTree');
+$otp->setLabel($user['email']);
+$otp->setIssuer('TouchTree');
 
 // Generate QR code URI for the user to scan
 $grCodeUri = $otp->getQrCodeUri(

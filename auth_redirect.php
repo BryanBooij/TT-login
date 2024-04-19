@@ -17,7 +17,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 </head>
 <body>
 <center>
-<a href="qr_auth.php"><button>I havent connected authenticator yet to this account</button></a><br><br>
+<a href="qr_auth.php"><button>I haven't connected authenticator yet to this account</button></a><br><br>
 <a href="auth.php"><button>i have connected authenticator to this account</button></a>
 </center>
 </body>

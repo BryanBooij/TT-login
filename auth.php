@@ -2,7 +2,6 @@
 session_start();
 $_SESSION['logged_in'] = true;
 $username = $_SESSION['username'];
-//$password = $_SESSION['password'];
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     // Redirect to login page
     header("Location: login.php");
@@ -40,7 +39,6 @@ if ($result === false) {
 $user = $result->fetch_assoc();
 $user_secret = $user['secret'];
 
-//$secret = "JBSWY3DPEHPK3PXP";
 $secret = $user_secret;
 
 // Create TOTP object with the generated secret
