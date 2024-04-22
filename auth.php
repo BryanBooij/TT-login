@@ -58,18 +58,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['auth'] = true;
         header("Location: home.php");
     } else {
-        $_SESSION['error_message'] = 'Invalid OTP code. Please try again.';
+        $_SESSION['error_message'] = 'Invalid Authentication code. Please try again.';
     }
 }
 ?>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/stylesheet.css">
+    <title>Authorization</title>
+</head>
+<body>
 <center>
 <!-- HTML form -->
-<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    <label for="otp">Enter 6 digit code:</label><br>
-    <input type="text" id="otp" name="otp"><br>
-    <input type="submit" value="Submit">
-</form>
-<a href="auth_redirect.php">Back</a>
+<div class="qr_form">
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <label for="otp">Enter 6 digit code:</label><br>
+        <input type="text" id="otp" name="otp"><br>
+        <input type="submit" value="Submit">
+    </form>
+    <a href="auth_redirect.php"><button>Back</button></a>
+</div>
 
 <?php
 if (isset($_SESSION['error_message'])) {
@@ -78,3 +87,5 @@ if (isset($_SESSION['error_message'])) {
 }
 ?>
 </center>
+</body>
+</html>

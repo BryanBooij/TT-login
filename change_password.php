@@ -45,29 +45,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Update the password
                 $update_sql = "UPDATE user SET password = '$hashed_new_password' WHERE username = '$username'";
                 if (mysqli_query($conn, $update_sql)) {
-                    echo "Password updated successfully!";
+                    echo "<div class='message success'>Password updated successfully!</div>";
                 } else {
-                    echo "Error updating password: " . mysqli_error($conn);
+                    echo "<div class='message error'>Error updating password: " . mysqli_error($conn) . "</div>";
                 }
             } else {
-                echo "Invalid old password!";
+                echo "<div class='message error'>Invalid old password!</div>";
             }
         } else {
-            echo "Invalid username!";
+            echo "<div class='message error'>Invalid username!</div>";
         }
     } else {
-        echo "All fields are required!";
+        echo "<div class='message error'>All fields are required!</div>";
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/stylesheet.css">
     <title>Change Password</title>
 </head>
 <body>
-<h2>Change Password</h2>
+<center>
+<h1 class="title">Change Password</h1>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <label>Username:</label><br>
     <input type="text" id="username" name="username" value="<?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : ''; ?>" readonly>
@@ -78,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="password" name="new_password"><br><br>
     <input type="submit" value="Submit">
 </form>
-<a href="home.php">Back</a>
+<a href="home.php"><button>Back</button></a>
+</center>
 </body>
 </html>
