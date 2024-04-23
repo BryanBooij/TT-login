@@ -38,7 +38,33 @@ if ($result === false) {
 $user = $result->fetch_assoc();
 // Fetch the user's secret from the result set
 $user_secret = $user['secret'];
+if ($user_secret == ''){
+    function generate_user_secret($length = 16) {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'; // Base32 characters
+        $secret = '';
+        for ($i = 0; $i < $length; $i++) {
+            $secret .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $secret;
+    }
+    $user_secret = generate_user_secret();
+    $insertSql = "UPDATE user SET secret = ? WHERE username = ?";
+    $stmt = $conn->prepare($insertSql);
+    if (!$stmt) {
+        die("Error preparing statement: " . $conn->error);
+    }
 
+    if (!$stmt->bind_param("ss", $user_secret, $username)) {
+        die("Error binding parameters: " . $stmt->error);
+    }
+    if ($stmt->execute()) {
+        echo "New record created successfully";
+    } else {
+        echo "Error executing query: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
 // Create TOTP object with the user's secret
 $otp = TOTP::create($user_secret);
 $otp->setLabel($user['email']);
