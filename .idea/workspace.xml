@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ccef30d-bb29-43bf-abf2-4b03bdb05c2f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/number.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth_redirect.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth_redirect.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connect.php" beforeDir="false" afterPath="$PROJECT_DIR$/connect.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qr_auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/qr_auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/stylesheet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/register_progress.php" beforeDir="false" afterPath="$PROJECT_DIR$/register_progress.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +119,7 @@
       <workItem from="1713854707341" duration="3159000" />
       <workItem from="1714028863600" duration="2563000" />
       <workItem from="1714031975641" duration="13644000" />
-      <workItem from="1714114348903" duration="11986000" />
+      <workItem from="1714114348903" duration="13701000" />
     </task>
     <servers />
   </component>

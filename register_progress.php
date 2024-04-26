@@ -1,17 +1,6 @@
 <?php
-$config = require 'config/app.php';
-
-$servername = $config['servername'];
-$username = $config['usernamelocalhost'];
-$password = $config['passwordlocalhost'];
-$database = $config['database'];
-
-$conn = new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+require_once 'connect.php';
+global $conn;
 function generate_user_secret($length = 16) {
     $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'; // Base32 characters
     $secret = '';
@@ -36,8 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $user_secret = generate_user_secret();
-    // Check if the email or username already exists
-//    $emailExists = emailExists($email);
     function usernameExists($username) {
         global $conn;
         $stmt = $conn->prepare("SELECT COUNT(*) FROM user WHERE username = ?");

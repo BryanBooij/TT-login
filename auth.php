@@ -10,19 +10,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 global $conn;
 require_once 'vendor/autoload.php';
 use OTPHP\TOTP;
-
-$config = require 'config/app.php';
-
-$servername = $config['servername'];
-$Gusername = $config['usernamelocalhost'];
-$Gpassword = $config['passwordlocalhost'];
-$database = $config['database'];
-
-$conn = new mysqli($servername, $Gusername, $Gpassword, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once "connect.php";
 
 // Prepare SQL query with parameters
 $sql = "SELECT secret FROM user WHERE username=?";

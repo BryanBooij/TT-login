@@ -16,7 +16,7 @@ session_start();
 </head>
 <body>
 <center>
-    <form action="connect.php" method="post">
+    <form action="loginUser.php" method="post">
         <h1>Sign in</h1>
         <img src="img/companyLogo.png" alt="logo" width="400" height="120"><br><BR>
         <div class="username_or_email">
@@ -33,7 +33,6 @@ session_start();
     </form>
     <div class="login">
         <a href="register.php"><button>Register</button></a>
-<!--        <a href="google.php"><button>Register using Google</button></a>-->
         <span class="whitespace"></span>
         <a href="google.php"><img src="img/google-logo.png" alt="google-logo" class="google-logo" width="40" height="40"></a>
     </div>
