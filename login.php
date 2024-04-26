@@ -34,6 +34,7 @@ session_start();
     <div class="login">
         <a href="register.php"><button>Register</button></a>
 <!--        <a href="google.php"><button>Register using Google</button></a>-->
+        <span class="whitespace"></span>
         <a href="google.php"><img src="img/google-logo.png" alt="google-logo" class="google-logo" width="40" height="40"></a>
     </div>
     <?php

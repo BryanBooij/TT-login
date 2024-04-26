@@ -36,7 +36,7 @@ if ($result === false) {
 }
 
 $user = $result->fetch_assoc();
-// Fetch the user's secret from the result set
+
 $user_secret = $user['secret'];
 if ($user_secret == ''){
     function generate_user_secret($length = 16) {
@@ -94,6 +94,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "OTP verified successfully!";
         $_SESSION['logged_in'] = true;
         $_SESSION['auth'] = true;
+        $insertsql = "UPDATE user SET qr_scanned = 1 WHERE username = ?";
+        $stmt = $conn->prepare($insertsql);
+        if (!$stmt) {
+            die("Error preparing statement: " . $conn->error);
+        }
+
+        if (!$stmt->bind_param("s", $username)) {
+            die("Error binding parameters: " . $stmt->error);
+        }
+        if ($stmt->execute()) {
+            echo "New record created successfully";
+        } else {
+            echo "Error executing query: " . $stmt->error;
+        }
+
+        $stmt->close();
         header("Location: home.php");
     } else {
         $_SESSION['error_message'] = 'Invalid Authentication code. Please try again.';

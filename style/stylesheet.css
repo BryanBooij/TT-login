@@ -9,7 +9,6 @@ body{
     padding-bottom: 10px;
     display: flex;
     flex-direction: row;
-
 }
 
 .redirect_links{
@@ -47,6 +46,10 @@ body{
 .login {
     margin: auto;
     padding: 5px;
+}
+
+.whitespace{
+    margin-right: 20px;
 }
 
 .google-logo{
