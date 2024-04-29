@@ -88,7 +88,7 @@ if (isset($_SESSION['error'])) {
     document.getElementById("phoneForm").addEventListener("submit", function(event) {
         var phoneNumber = document.getElementById("phone").value;
         if (phoneNumber.length !== 9) {
-            event.preventDefault(); // Prevent form submission
+            event.preventDefault();
             alert("Phone number must be 9 digits long.");
         }
     });

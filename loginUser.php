@@ -8,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usernameOrEmail = $_POST["username_or_email"];
     $password = $_POST["password"];
 
-    // Fetch the hashed password from the database based on the provided username or email
     $stmt = $conn->prepare("SELECT username, password FROM user WHERE username = ? OR email = ?");
     $stmt->bind_param("ss", $usernameOrEmail, $usernameOrEmail);
     $stmt->execute();

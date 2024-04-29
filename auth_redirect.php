@@ -50,6 +50,7 @@ $result = $conn->query($sql);
             } else {
                 echo '<a href="auth.php"><button class="btn btn-outline-secondary d-inline-flex align-items-center" type="button">i have connected Authenticator to this account</button></a>';
             }
+            echo '<br><a href="number.php"><button class="btn btn-primary d-inline-flex align-items-center" type="button">send sms code</button></a><br>';
             ?>
         </div>
         <img src="img/auth-logo-google.png" alt="auth-logo" width="150" height="150">
