@@ -7,8 +7,6 @@
     <list default="true" id="5ccef30d-bb29-43bf-abf2-4b03bdb05c2f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth_redirect.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth_redirect.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loginUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/loginUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/number.php" beforeDir="false" afterPath="$PROJECT_DIR$/number.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sms.php" beforeDir="false" afterPath="$PROJECT_DIR$/sms.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

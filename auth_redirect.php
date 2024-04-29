@@ -9,7 +9,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 require_once 'connect.php';
 
-$sql = "SELECT qr_scanned, email FROM user WHERE username=?";
+$sql = "SELECT qr_scanned, email, number FROM user WHERE username=?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $username);
 $stmt->execute();
@@ -22,6 +22,8 @@ if ($result === false) {
 $user = $result->fetch_assoc();
 $email = $user['email'];
 $qr = $user['qr_scanned'];
+$number = $user['number'];
+$_SESSION['number'] = $number;
 $result = $conn->query($sql);
 
 ?>
@@ -50,7 +52,12 @@ $result = $conn->query($sql);
             } else {
                 echo '<a href="auth.php"><button class="btn btn-outline-secondary d-inline-flex align-items-center" type="button">i have connected Authenticator to this account</button></a>';
             }
-            echo '<br><a href="number.php"><button class="btn btn-primary d-inline-flex align-items-center" type="button">send sms code</button></a><br>';
+            if ($number == '') {
+                echo '<br><a href="number.php"><button class="btn btn-primary d-inline-flex align-items-center" type="button">input number</button></a><br>';
+            } else {
+                echo '<br><a href="sms.php"><button class="btn btn-primary d-inline-flex align-items-center" type="button">send sms code</button></a><br>';
+            }
+
             ?>
         </div>
         <img src="img/auth-logo-google.png" alt="auth-logo" width="150" height="150">

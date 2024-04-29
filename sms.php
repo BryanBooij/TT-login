@@ -2,10 +2,16 @@
 global $conn;
 session_start();
 include 'connect.php';
-$number = $_POST['phone'];
-$region = $_POST['country'];
-$fullNumber = $region . $number;
 $username = $_SESSION['username'];
+
+if ($_SESSION['number']!='') {
+    $fullNumber = $_SESSION['number'];
+}else{
+    $number = $_POST['phone'];
+    $region = $_POST['country'];
+    $fullNumber = $region . $number;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_POST['verification_code'])) {
         $userVerificationCode = trim($_POST['verification_code']);
