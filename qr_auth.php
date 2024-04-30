@@ -1,4 +1,5 @@
 <?php
+// display qr code for autheticator login
 session_start();
 $_SESSION['logged_in'] = true;
 $username = $_SESSION['username'];

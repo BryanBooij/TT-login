@@ -1,4 +1,5 @@
 <?php
+//connection to local database
 $config = require 'config/app.php';
 
 $servername = $config['servername'];

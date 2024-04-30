@@ -1,5 +1,5 @@
 <?php
-
+// login user to check if user exists
 global $conn;
 require_once "connect.php";
 

@@ -1,7 +1,9 @@
 <?php
+//session start needed on every page to redirect users that are NOT logged in back to main page
 session_start();
 global $conn;
 $username = $_SESSION['username'];
+// sends user back to login if not logged in already
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: login.php");
     exit;
@@ -46,12 +48,13 @@ $result = $conn->query($sql);
         <div class="redirect_links">
             <?php
             require_once __DIR__ . '/vendor/autoload.php';
-
+            // checks if qr is scanned or not, based on result show a different button
             if ($qr == 0) {
                 echo '<a href="qr_auth.php"><button class="btn btn-primary d-inline-flex align-items-center" type="button">I havent connected my Authenticator yet</button></a><br>';
             } else {
                 echo '<a href="auth.php"><button class="btn btn-outline-secondary d-inline-flex align-items-center" type="button">i have connected Authenticator to this account</button></a>';
             }
+            // checks if user already has a registered number
             if ($number == '') {
                 echo '<br><a href="number.php"><button class="btn btn-primary d-inline-flex align-items-center" type="button">input number</button></a><br>';
             } else {

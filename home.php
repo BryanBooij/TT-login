@@ -1,5 +1,7 @@
 <?php
+// application home page
 session_start();
+// checks if user is properly logged in
 if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
     // Redirect to login page
     header("Location: login.php");

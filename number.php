@@ -84,14 +84,14 @@ if (isset($_SESSION['error'])) {
     unset($_SESSION['error']);
 }
 ?>
-<script>
-    document.getElementById("phoneForm").addEventListener("submit", function(event) {
-        var phoneNumber = document.getElementById("phone").value;
-        if (phoneNumber.length !== 9) {
-            event.preventDefault();
-            alert("Phone number must be 9 digits long.");
-        }
-    });
-</script>
+<!--<script>-->
+<!--    document.getElementById("phoneForm").addEventListener("submit", function(event) {-->
+<!--        var phoneNumber = document.getElementById("phone").value;-->
+<!--        if (phoneNumber.length !== 9) {-->
+<!--            event.preventDefault();-->
+<!--            alert("Phone number must be 9 digits long.");-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
 </body>
 </html>

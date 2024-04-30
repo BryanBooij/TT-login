@@ -13,7 +13,7 @@ include_once 'google.php';
 $config = require 'config/app.php';
 
 
-
+// send email function for Google login users
 function sendEmail($email, $randomPassword, $username)
 {
     global $config;

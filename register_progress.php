@@ -20,11 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($password !== $password_repeat) {
         $error_message = "Passwords do not match.";
         header("Location: register.php?error=" . urlencode($error_message));
-        exit; // Stop execution
+        exit(); // Stop execution
     }
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $user_secret = generate_user_secret();
+    // checks if username exists or not $count will be 1 is user exists
     function usernameExists($username) {
         global $conn;
         $stmt = $conn->prepare("SELECT COUNT(*) FROM user WHERE username = ?");

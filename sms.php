@@ -1,8 +1,15 @@
 <?php
-global $conn;
+global $conn, $phoneNumber;
 session_start();
 include 'connect.php';
 $username = $_SESSION['username'];
+require_once 'vendor/autoload.php';
+use Twilio\Rest\Client;
+$config = require 'config/app.php';
+$accountSid = $config['smsAccountSid'];
+$authToken =$config['smsAuthToken'];
+
+$twilio = new Client($accountSid, $authToken);
 
 if ($_SESSION['number']!='') {
     $fullNumber = $_SESSION['number'];
@@ -12,56 +19,63 @@ if ($_SESSION['number']!='') {
     $fullNumber = $region . $number;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(isset($_POST['verification_code'])) {
-        $userVerificationCode = trim($_POST['verification_code']);
+function validatePhoneNumber($phoneNumber) {
+    global $username, $conn, $twilio, $config;
+    if (preg_match('/^\+?\d{1,3}\s?\(?\d{1,4}\)?[-.\s]?\d{1,10}$/', $phoneNumber)) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if(isset($_POST['verification_code'])) {
+                $userVerificationCode = trim($_POST['verification_code']);
 
-        if ($userVerificationCode == $_SESSION['verification_code']) {
-            $stmt = $conn->prepare("UPDATE user SET number = ? WHERE username = ?");
-            $stmt->bind_param("ss", $fullNumber, $username);
-            $stmt->execute();
-            $stmt->close();
-            $_SESSION['auth'] = true;
-            header("Location: home.php");
-            exit();
-        } else {
-            echo "Verification code is incorrect.";
+                if ($userVerificationCode == $_SESSION['verification_code']) {
+                    $stmt = $conn->prepare("UPDATE user SET number = ? WHERE username = ?");
+                    $stmt->bind_param("ss", $phoneNumber, $username);
+                    $stmt->execute();
+                    $stmt->close();
+                    $_SESSION['auth'] = true;
+                    header("Location: home.php");
+                    exit();
+                } else {
+                    echo "Verification code is incorrect.";
+                }
+            }
         }
+
+        function generateVerificationCode() {
+            return mt_rand(100000, 999999);
+        }
+
+        $verificationCode = generateVerificationCode();
+        $_SESSION['verification_code'] = $verificationCode;
+
+        $message = "Your verification code is: $verificationCode";
+
+        try {
+            $twilio->messages->create(
+                $phoneNumber,
+                [
+                    "body" => $message,
+                    "from" => $config['number']
+                ]
+            );
+            echo "<center>Verification code sent successfully to $phoneNumber</center>";
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+        return true;
+    } else {
+        $error_message = "Invalid phone number";
+        $_SESSION['error'] = $error_message;
+        header("Location: number.php");
+        exit();
     }
 }
 
-
-
-require_once 'vendor/autoload.php';
-use Twilio\Rest\Client;
-$config = require 'config/app.php';
-$accountSid = $config['smsAccountSid'];
-$authToken =$config['smsAuthToken'];
-
-$twilio = new Client($accountSid, $authToken);
-
-function generateVerificationCode() {
-    return mt_rand(100000, 999999);
-}
-
-$verificationCode = generateVerificationCode();
-$_SESSION['verification_code'] = $verificationCode;
-
-$message = "Your verification code is: $verificationCode";
-
-try {
-    $twilio->messages->create(
-        $fullNumber,
-        [
-            "body" => $message,
-            "from" => "+12513698817"
-        ]
-    );
-
-    // SMS sent successfully
-    echo "Verification code sent successfully.";
-} catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
+// Example usage
+$userPhoneNumber = $fullNumber;
+if (validatePhoneNumber($userPhoneNumber)) {
+    echo "";
+} else {
+    echo "Invalid phone number";
 }
 ?>
 <!DOCTYPE html>
@@ -74,6 +88,7 @@ try {
     <title>Verification Code</title>
 </head>
 <body>
+<center>
 <h2>Enter Verification Code</h2>
 <form action="" method="post">
     <input type="hidden" name="phone" value="<?php echo htmlspecialchars($fullNumber); ?>"> <!-- needs to be added otherwise the number doesn't get saved and put in the query-->
@@ -81,5 +96,6 @@ try {
     <input type="text" id="verification_code" name="verification_code"><br><br>
     <input type="submit" value="Submit">
 </form>
+</center>
 </body>
 </html>

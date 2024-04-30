@@ -1,4 +1,5 @@
 <?php
+//session start needed on every page to redirect users that are NOT logged in back to main page
 session_start();
 $_SESSION['logged_in'] = true;
 $username = $_SESSION['username'];
@@ -13,6 +14,7 @@ use OTPHP\TOTP;
 use PHPMailer\PHPMailer\PHPMailer;
 require "connect.php";
 
+//sql query to get secret and email from user for authenticator validation
 $sql = "SELECT secret, email FROM user WHERE username=?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $username);
@@ -28,8 +30,10 @@ $user_secret = $user['secret'];
 $email = $user['email'];
 $secret = $user_secret;
 
+//creates from user_secret the correct code
 $otp = TOTP::create($secret);
 
+//checks if user input is correct
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input_otp = $_POST['otp'];
     $verification_result = $otp->verify($input_otp);
@@ -53,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <center>
-    <!-- HTML form -->
+    <!-- HTML authentication form -->
     <div class="qr_form">
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <label for="otp">Enter 6 digit code:</label><br>
@@ -65,7 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <?php
-    require_once 'config/app.php';
     if (isset($_SESSION['error_message'])) {
         echo '<p style="color: red;">' . $_SESSION['error_message'] . '</p>';
         unset($_SESSION['error_message']);
@@ -83,6 +86,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ".$_SERVER['PHP_SELF']);
         exit();
     }
+
+    // function to send new qr code with user_secret to user if the old is lost
     function send_qr_email($email) {
         global $conn;
         $config = require 'config/app.php';
@@ -104,15 +109,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $otp->setLabel($user['email']);
         $otp->setIssuer('TouchTree');
 
-
+        // create new qr code from user_secret
         $grCodeUri = $otp->getQrCodeUri(
             'https://api.qrserver.com/v1/create-qr-code/?data=[DATA]&size=300x300&ecc=M',
             '[DATA]'
         );
 
         try {
-            $mail_FROM = 'bryan@touchtree.tech';
-            $user_RCPT = $email;
+            $mail_FROM = $config['username'];
+            $user_RCPT = $email; //get user email
             // SMTP server settings
             $mail->isSMTP();
             $mail->Host = 'smtp.elasticemail.com';

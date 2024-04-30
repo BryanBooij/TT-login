@@ -1,21 +1,13 @@
 <?php
+//session start needed on every page to redirect users that are NOT logged in back to main page
+global $conn;
 session_start();
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     // Redirect to login page
     header("Location: login.php");
     exit;
 }
-
-$servername = "localhost";
-$dbusername = "root";
-$password = "";
-$database = "users";
-
-$conn = new mysqli($servername, $dbusername, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once 'connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if all fields are filled
