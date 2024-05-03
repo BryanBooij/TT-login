@@ -19,7 +19,7 @@ require_once 'vendor/autoload.php';
     <img src="img/lock.png" width="200" height="200"><br><br>
     <form action="sms.php" method="post" id="phoneForm">
         <label for="country">Country:</label>
-        <select id="country" name="country">
+        <select id="country" name="country" onchange="updateCountryCode()">
             <option value="+31">🇳🇱 (+31) Netherlands</option>
             <option value="+44">🇬🇧 (+44) United Kingdom</option>
             <option value="+355">🇦🇱 (+355) Albania</option>
@@ -72,9 +72,12 @@ require_once 'vendor/autoload.php';
             <option value="+380">🇺🇦 (+380) Ukraine</option>
             <option value="+1">🇺🇸 (+1) United States</option>
             <option value="+379">🇻🇦 (+379) Vatican City</option>
+            <option value="">() Different country</option>
         </select><br>
         <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" placeholder="61234567890" required>
+        <label for="countryCode"></label>
+        <input type="text" id="countryCode" name="countryCode" value="+31" size="1%" readonly> <!-- readonly for users to better understand the purpose -->
+        <input type="tel" id="phone" name="phone" placeholder="61234567890" minlength="8" required>
         <button type="submit">Submit</button>
     </form>
 </center>
@@ -84,14 +87,13 @@ if (isset($_SESSION['error'])) {
     unset($_SESSION['error']);
 }
 ?>
-<!--<script>-->
-<!--    document.getElementById("phoneForm").addEventListener("submit", function(event) {-->
-<!--        var phoneNumber = document.getElementById("phone").value;-->
-<!--        if (phoneNumber.length !== 9) {-->
-<!--            event.preventDefault();-->
-<!--            alert("Phone number must be 9 digits long.");-->
-<!--        }-->
-<!--    });-->
-<!--</script>-->
+
+<script>
+    // function for updating countryCode value
+    function updateCountryCode() {
+        document.getElementById("countryCode").value = document.getElementById("country").value;
+    }
+</script>
+
 </body>
 </html>

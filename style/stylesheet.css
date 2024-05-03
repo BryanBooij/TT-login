@@ -58,3 +58,11 @@ body{
     height: 50px;
 }
 
+.centered-content{
+    text-align: center !important;
+}
+
+.custom-input-group {
+    position: relative;
+    margin-left: 25%;
+}

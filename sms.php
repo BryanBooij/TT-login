@@ -7,17 +7,14 @@ require_once 'vendor/autoload.php';
 use Twilio\Rest\Client;
 $config = require 'config/app.php';
 $accountSid = $config['smsAccountSid'];
-$authToken =$config['smsAuthToken'];
+$authToken = $config['smsAuthToken'];
 
 $twilio = new Client($accountSid, $authToken);
 
-if ($_SESSION['number']!='') {
-    $fullNumber = $_SESSION['number'];
-}else{
-    $number = $_POST['phone'];
-    $region = $_POST['country'];
-    $fullNumber = $region . $number;
-}
+$number = $_POST['phone'];
+$region = $_POST['country'];
+$fullNumber = $region . $number;
+
 
 function validatePhoneNumber($phoneNumber) {
     global $username, $conn, $twilio, $config;
