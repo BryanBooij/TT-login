@@ -1,7 +1,8 @@
 <?php
-//connection to local database
+//connection to local database change to online database if needed
 $config = require 'config/app.php';
 
+// database login information for connection
 $servername = $config['servername'];
 $Gusername = $config['usernamelocalhost'];
 $Gpassword = $config['passwordlocalhost'];

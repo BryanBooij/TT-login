@@ -3,7 +3,6 @@
 global $conn;
 require_once "connect.php";
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usernameOrEmail = $_POST["username_or_email"];
     $password = $_POST["password"];

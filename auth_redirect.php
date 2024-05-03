@@ -3,14 +3,15 @@
 session_start();
 global $conn;
 $username = $_SESSION['username'];
-// sends user back to login if not logged in already
+// sends user back to log in if not logged in already
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: login.php");
-    exit;
+    exit();
 }
 
 require_once 'connect.php';
 
+// get information from database needed for authentication
 $sql = "SELECT qr_scanned, email, number FROM user WHERE username=?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $username);

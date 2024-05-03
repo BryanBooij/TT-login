@@ -8,7 +8,6 @@ use Twilio\Rest\Client;
 $config = require 'config/app.php';
 $accountSid = $config['smsAccountSid'];
 $authToken = $config['smsAuthToken'];
-
 $twilio = new Client($accountSid, $authToken);
 
 $number = $_POST['phone'];
@@ -43,7 +42,7 @@ function validatePhoneNumber($phoneNumber) {
 
         $verificationCode = generateVerificationCode();
         $_SESSION['verification_code'] = $verificationCode;
-
+        // phone message to display to user
         $message = "Your verification code is: $verificationCode";
 
         try {
@@ -51,7 +50,7 @@ function validatePhoneNumber($phoneNumber) {
                 $phoneNumber,
                 [
                     "body" => $message,
-                    "from" => $config['number']
+                    "from" => "TouchTree"
                 ]
             );
             echo "<center>Verification code sent successfully to $phoneNumber</center>";

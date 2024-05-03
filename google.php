@@ -26,13 +26,12 @@ if (isset($_GET['code'])) {
     $name = strtolower($userInfo->getGivenName()); // lowercase string for easier access for users
 
     function generateRandomPassword($length = 12) {
-        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_';
-
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $password = '';
+        // as long as $i is smaller than 12 continue for loop for random numbers
         for ($i = 0; $i < $length; $i++) {
             $password .= $chars[random_int(0, strlen($chars) - 1)];
         }
-
         return $password;
     }
 
@@ -48,7 +47,7 @@ if (isset($_GET['code'])) {
     // create temp password for Google users
     $randomPassword = generateRandomPassword();
     $hashed_password = password_hash($randomPassword, PASSWORD_DEFAULT);
-    // create usersecret for authenticator qr
+    // create user_secret for authenticator qr
     $user_secret = generate_user_secret();
 
     // Check if the email already exists in the database
@@ -82,7 +81,6 @@ if (isset($_GET['code'])) {
             die("Error binding parameters: " . $stmt->error);
         }
 
-
         if ($stmt->execute()) {
             echo "New record created successfully";
         } else {
@@ -91,7 +89,7 @@ if (isset($_GET['code'])) {
 
         $stmt->close();
     }
-
+    // close database connection
     $conn->close();
     $_SESSION['access_token'] = $accessToken;
     $_SESSION['logged_in'] = true;

@@ -6,8 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="5ccef30d-bb29-43bf-abf2-4b03bdb05c2f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/change_password.php" beforeDir="false" afterPath="$PROJECT_DIR$/change_password.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/number.php" beforeDir="false" afterPath="$PROJECT_DIR$/number.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_redirect.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth_redirect.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connect.php" beforeDir="false" afterPath="$PROJECT_DIR$/connect.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/google.php" beforeDir="false" afterPath="$PROJECT_DIR$/google.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/google_logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/google_logout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/loginUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr_auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/qr_auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/register_progress.php" beforeDir="false" afterPath="$PROJECT_DIR$/register_progress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/send_email.php" beforeDir="false" afterPath="$PROJECT_DIR$/send_email.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sms.php" beforeDir="false" afterPath="$PROJECT_DIR$/sms.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +65,7 @@
     </include_path>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -120,7 +129,7 @@
       <workItem from="1714459603628" duration="12753000" />
       <workItem from="1714632300478" duration="9179000" />
       <workItem from="1714718644541" duration="1466000" />
-      <workItem from="1714734786253" duration="5426000" />
+      <workItem from="1714734786253" duration="8846000" />
     </task>
     <servers />
   </component>

@@ -31,14 +31,13 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 <a href="change_password.php"><button>Change password</button></a><br>
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-
+// if statements to see which access tokens to logout
 if (isset($_SESSION['access_token'])) {
     echo '<a href="google_logout.php"><button>Logout</button></a>';
 } else {
     echo '<a href="logout.php"><button>Logout</button></a>';
 }
 ?>
-</center>
 </center>
 </body>
 </html>

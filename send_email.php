@@ -1,11 +1,5 @@
 <?php
-
-require 'C:\xampp\htdocs\TT-login\vendor\phpmailer\phpmailer\src\Exception.php';
-require 'C:\xampp\htdocs\TT-login\vendor\phpmailer\phpmailer\src/PHPMailer.php';
-require 'C:\xampp\htdocs\TT-login\vendor\phpmailer\phpmailer\src/SMTP.php';
-
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/stylesheet.css">
     <title>Register</title>
 </head>
 <body>
@@ -18,16 +20,16 @@
     ?>
     <form action="register_progress.php" method="post">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
+        <input type="text" id="username" name="username" required><br>
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
+        <input type="email" id="email" name="email" required><br>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
+        <input type="password" id="password" name="password" required><br>
 
         <label for="password_repeat">Repeat Password:</label>
-        <input type="password" id="password_repeat" name="password_repeat" required><br><br>
+        <input type="password" id="password_repeat" name="password_repeat" required><br>
 
         <input type="submit" value="Register">
     </form>

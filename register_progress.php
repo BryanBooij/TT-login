@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($password !== $password_repeat) {
         $error_message = "Passwords do not match.";
         header("Location: register.php?error=" . urlencode($error_message));
-        exit(); // Stop execution
+        exit();
     }
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -47,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Email already exists. Use a different one";
     }
 
-
     if ($conn->query($sql) === TRUE) {
         session_start();
         $_SESSION['logged_in'] = true;
@@ -60,4 +59,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $conn->close();
-
