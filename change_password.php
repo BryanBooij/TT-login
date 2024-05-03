@@ -64,13 +64,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <center>
 <h1 class="title">Change Password</h1>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <label>Username:</label><br>
+    <label for="username">Username:</label><br>
     <input type="text" id="username" name="username" value="<?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : ''; ?>" readonly>
     <br><br>
-    <label>Old Password:</label><br>
-    <input type="password" name="old_password"><br><br>
-    <label>New Password:</label><br>
-    <input type="password" name="new_password"><br><br>
+    <label for="oldPassword">Old Password:</label><br>
+    <input type="password" id="oldPassword" name="old_password"><br><br>
+    <label for="newPassword">New Password:</label><br>
+    <input type="password" id="newPassword" name="new_password"><br><br>
     <input type="submit" value="Submit">
 </form>
 <a href="home.php"><button>Back</button></a>

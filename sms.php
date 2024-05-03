@@ -56,7 +56,11 @@ function validatePhoneNumber($phoneNumber) {
             );
             echo "<center>Verification code sent successfully to $phoneNumber</center>";
         } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
+            //echo "Error: " . $e->getMessage();
+            $error_message = "An error has occurred while sending SMS to " . $phoneNumber . " please check number and try again";
+            $_SESSION['error'] = $error_message;
+            header("Location: number.php");
+            exit();
         }
         return true;
     } else {
