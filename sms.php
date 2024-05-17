@@ -10,13 +10,32 @@ $accountSid = $config['smsAccountSid'];
 $authToken = $config['smsAuthToken'];
 $twilio = new Client($accountSid, $authToken);
 
-$number = $_POST['phone'];
-$region = $_POST['country'];
-$fullNumber = $region . $number;
+
+
+$sql = "SELECT number FROM user WHERE username=?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result === false) {
+    die("Error executing the query: " . $conn->error);
+}
+$user = $result->fetch_assoc();
+
+if ($user['number']!="")
+{
+    $fullNumber = $user['number'];
+}else{
+    $number = $_POST['phone'];
+    $region = $_POST['country'];
+    $fullNumber = $region . $number;
+}
+
 
 
 function validatePhoneNumber($phoneNumber) {
-    global $username, $conn, $twilio, $config;
+    global $username, $conn, $twilio;
     if (preg_match('/^\+?\d{1,3}\s?\(?\d{1,4}\)?[-.\s]?\d{1,10}$/', $phoneNumber)) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if(isset($_POST['verification_code'])) {

@@ -23,7 +23,7 @@ if (isset($_GET['code'])) {
     $googleOAuthService = new Google_Service_Oauth2($client);
     $userInfo = $googleOAuthService->userinfo->get();
     $email = $userInfo->getEmail();
-    $name = strtolower($userInfo->getGivenName()); // lowercase string for easier access for users
+    $name = strtolower($userInfo->getGivenName());
 
     function generateRandomPassword($length = 12) {
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

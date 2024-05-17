@@ -46,8 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['error_message'] = 'Invalid Authentication code. Please try again.';
     }
 }
-
-
 ?>
 <html lang="en">
 <head>

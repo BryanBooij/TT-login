@@ -114,11 +114,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <center>
 <!-- HTML form -->
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    <label for="otp">Enter 6 digit code:</label><br>
+    <label for="otp">Enter 6-digit code:</label><br>
     <input type="text" id="otp" name="otp"><br>
     <input type="submit" value="Submit">
 </form>
-
 <a href="auth_redirect.php"><button>Back</button></a>
     <?php
     if (isset($_SESSION['error_message'])) {
